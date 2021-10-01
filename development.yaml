@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server
+spec:
+ replicas: 1 
+ selector:
+   matchLabels:
+     app: api-server
+ template:
+    metadata:
+     labels:
+      app: api-server
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: api-server
+        image: repo.eoxvantage.com/v1_zf:capstone
+        env:
+        - name: HOST
+          valueFrom: 
+            configMapKeyRef:
+              name: api-configmap
+              key: HOST
+        - name: DB_HOST
+          valueFrom: 
+            configMapKeyRef:
+              name: api-configmap
+              key: DB_HOST
+        - name: DB_USERNAME
+          valueFrom: 
+            configMapKeyRef:
+              name: api-configmap
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom: 
+            configMapKeyRef:
+              name: api-configmap
+              key: DB_PASSWORD
+        - name: API_DB
+          valueFrom: 
+            configMapKeyRef:
+              name: api-configmap
+              key: API_DB
+        - name: TEST_API_DB
+          valueFrom: 
+            configMapKeyRef:
+              name: api-configmap
+              key: TEST_API_DB
+        - name: DB
+          valueFrom: 
+            configMapKeyRef:
+              name: api-configmap
+              key: DB
+        volumeMounts:
+        - name: efs-pvc
+          mountPath: /app
+          
+      volumes:
+        - name: efs-pvc
+          persistentVolumeClaim:
+            claimName: efs-storage-claim
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-container
+spec:
+ replicas: 1 
+ selector:
+   matchLabels:
+     app: frontend-container
+ template:
+    metadata:
+     labels:
+      app: frontend-container
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: frontend-container
+        image: repo.eoxvantage.com/view_vw:latest
+        env:
+        - name: IP
+          valueFrom: 
+            configMapKeyRef:
+              name: view-configmap
+              key: IP
+        volumeMounts:
+        - name: efs-pvc
+          mountPath: /app
+          
+      volumes:
+        - name: efs-pvc
+          persistentVolumeClaim:
+            claimName: efs-storage-claim

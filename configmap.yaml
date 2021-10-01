@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-configmap
+data:
+  HOST : '44.199.65.81'
+  DB: 'oxzionapi'
+  DB_HOST: '44.199.65.81'
+  DB_USERNAME: 'root'
+  DB_PASSWORD: 'password'
+  API_DB: 'test'
+  TEST_API_DB: 'test'
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: view-configmap
+data:
+  IP : api-service
