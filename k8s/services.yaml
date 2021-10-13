@@ -30,7 +30,7 @@ metadata:
 spec:
   selector:
     app: api-server
-  type: LoadBalancer  
+  # type: LoadBalancer  
   ports:
     - protocol: TCP
       port: 8080
@@ -45,7 +45,7 @@ metadata:
 spec:
   selector:
     app: frontend-container
-  type: LoadBalancer  
+  # type: LoadBalancer  
   ports:
     - protocol: TCP
       port: 8081
