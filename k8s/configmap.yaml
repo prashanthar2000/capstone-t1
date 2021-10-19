@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: api-configmap
 data:
-  HOST : '44.199.65.81'
+  HOST : mysql-service
   DB: 'oxzionapi'
-  DB_HOST: '44.199.65.81'
+  DB_HOST: mysql-service
   DB_USERNAME: 'root'
   DB_PASSWORD: 'password'
   API_DB: 'test'
