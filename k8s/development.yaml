@@ -21,7 +21,11 @@ spec:
           ports:
             - containerPort: 8080
             - containerPort: 8081
-      
+          resources:
+            requests:
+              cpu: 500m
+            limits:
+              cpu: 500m
       volumes:
         - name: config
           configMap:
@@ -87,6 +91,11 @@ spec:
             configMapKeyRef:
               name: api-configmap
               key: DB
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 500m
         volumeMounts:
         - name: efs-pvc
           mountPath: /app

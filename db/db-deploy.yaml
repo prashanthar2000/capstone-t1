@@ -29,6 +29,11 @@ spec:
                 secretKeyRef:
                   name: mysql-secrets
                   key: ROOT_PASSWORD
+          resources:
+            requests:
+              cpu: 500m
+            limits:
+              cpu: 500m
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
