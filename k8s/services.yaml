@@ -17,6 +17,11 @@ spec:
       name: frontend-service
       targetPort: 8081
       protocol: TCP
+    
+    - port: 8065
+      name: mchat-service
+      targetPort: 8065
+      protocol: TCP
 
   selector:
     app: nginx

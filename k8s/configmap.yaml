@@ -17,37 +17,5 @@ kind: ConfigMap
 metadata:
   name: view-configmap
 data:
-  IP : api-service
+  IP : capstone-demo.ddns.net
 
-# --- 
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: nginx-config 
-# data:
-#   reverser_proxy.conf: |
-      # # Web configuration #####################
-      # http {
-      #     server {
-      #         listen 8080;
-      #         location / {
-      #             proxy_set_header   X-Real-IP        $remote_addr;
-      #             proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-      #             proxy_set_header   Host             $host;
-
-      #             proxy_pass http://api-service:8080/;
-
-      #         }
-      #     }
-      #     server{
-      #         listen 8081;
-      #         location / {
-      #             proxy_set_header   X-Real-IP        $remote_addr;
-      #             proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-      #             proxy_set_header   Host             $host;
-
-      #             proxy_pass http://frontend-service:8081/;
-
-      #         }
-      #     }
-      # }

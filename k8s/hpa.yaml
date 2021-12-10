@@ -9,7 +9,7 @@ spec:
     name: frontend-container
   minReplicas: 1
   maxReplicas: 5
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 50
 
 ---
 
@@ -24,7 +24,7 @@ spec:
     name: api-server
   minReplicas: 1
   maxReplicas: 5
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 50
 
 ---
 apiVersion: autoscaling/v1
@@ -38,7 +38,7 @@ spec:
     name: nginx
   minReplicas: 1
   maxReplicas: 5
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 50
 
 ---
 apiVersion: autoscaling/v1
@@ -52,4 +52,18 @@ spec:
     name: mysql-deployment
   minReplicas: 1
   maxReplicas: 5
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 50
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mchat-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mchat
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50

@@ -18,14 +18,18 @@ spec:
           volumeMounts:
             - mountPath: /etc/nginx
               name: config
+            
           ports:
             - containerPort: 8080
             - containerPort: 8081
+            - containerPort: 8065
           resources:
             requests:
-              cpu: 500m
+              cpu: 250m
             limits:
               cpu: 500m
+          
+            
       volumes:
         - name: config
           configMap:
@@ -33,6 +37,8 @@ spec:
             items:
               - key: nginx.conf
                 path: nginx.conf
+ 
+        
               
 
 ---
@@ -93,7 +99,7 @@ spec:
               key: DB
         resources:
           requests:
-            cpu: 500m
+            cpu: 250m
           limits:
             cpu: 500m
         volumeMounts:
@@ -134,7 +140,7 @@ spec:
               key: IP
         resources:
           requests:
-            cpu: 500m
+            cpu: 250m
           limits:
             cpu: 500m
         volumeMounts:

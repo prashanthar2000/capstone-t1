@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mchat
+spec:
+ replicas: 1 
+ selector:
+   matchLabels:
+     app: mchat
+ template:
+    metadata:
+     labels:
+      app: mchat
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: mchat
+        image: repo.eoxvantage.com/mchat:v1
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        volumeMounts:
+        - name: efs-pvc
+          mountPath: /mattermost
+          subPath: chat-master/mattermost
+          
+      volumes:
+        - name: efs-pvc
+          persistentVolumeClaim:
+            claimName: efs-storage-claim
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mchat-service
+spec:
+  selector:
+    app: mchat
+  ports:
+    - protocol: TCP
+      port: 8065
+      targetPort: 8065

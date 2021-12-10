@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dspace
+spec:
+  rules:
+  - host: capstone-demo.ddns.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: frontend-service
+          servicePort: 8081
+      - path: /api
+        backend:
+          serviceName: api-service
+          servicePort: 8080
